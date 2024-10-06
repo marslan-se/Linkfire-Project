@@ -33,3 +33,17 @@ pageview_countires = pageview_data['country'].value_counts()
 print("Pageviews by country:")
 print(pageview_countires)
 print("\n")
+
+# What was the overall click rate (clicks/pageviews)?
+click_event_data = df[df['event'] == 'click']
+total_clicks = len(click_event_data)
+
+if total_pageviews > 0:
+    click_rate = total_clicks / total_pageviews
+else:
+    click_rate = 0
+
+print(f"Total pageviews: {total_pageviews}")
+print(f"Total clicks: {total_clicks}")
+print(f"Overall click rate (clicks/pageviews): {click_rate:.4f}")
+print("\n")
