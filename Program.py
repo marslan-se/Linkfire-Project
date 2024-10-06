@@ -11,6 +11,7 @@ total_pageviews = len(pageview_data)
 daily_pageviews = pageview_data.groupby('date').size()
 
 print(f"Total pageview events: {total_pageviews}")
+print("\n")
 print("Pageview events per day:")
 print(daily_pageviews)
 print("\n")
@@ -23,6 +24,7 @@ daily_other_events = other_events_data.groupby(['date', 'event']).size()
 
 print("Other events:")
 print(other_events_data_by_type)
+print("\n")
 print("Other events per day: ")
 print(daily_other_events)
 print("\n")
@@ -47,3 +49,15 @@ print(f"Total pageviews: {total_pageviews}")
 print(f"Total clicks: {total_clicks}")
 print(f"Overall click rate (clicks/pageviews): {click_rate:.4f}")
 print("\n")
+
+# How does the clickrate distribute across different links?
+link_data = df.groupby('linkid').agg({'event': 'count'}).reset_index()
+link_data.rename(columns={'event': 'clicks'}, inplace=True)
+
+link_data['pageviews'] = link_data['clicks']  # Assuming each click is a pageview
+
+link_data['click_rate'] = link_data['clicks'] / link_data['pageviews']
+link_data['click_rate'] = link_data['click_rate'].fillna(0)
+
+print("Click rate distribution across different links:")
+print(link_data[['linkid', 'clicks', 'pageviews', 'click_rate']])
