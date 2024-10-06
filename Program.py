@@ -27,3 +27,9 @@ print("Other events per day: ")
 print(daily_other_events)
 print("\n")
 
+# Which countries did the pageviews come from?
+pageview_countires = pageview_data['country'].value_counts()
+
+print("Pageviews by country:")
+print(pageview_countires)
+print("\n")
